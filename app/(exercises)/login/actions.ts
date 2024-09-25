@@ -3,9 +3,20 @@
 
 import { cookies } from "next/headers";
 
-const baseUrl = "http://localhost:3000/api";
+const baseUrl = "https://api.origamid.online";
 
-export async function loginAction({
+function getCookie(key: string) {
+  return cookies().get(key)?.value;
+}
+
+function setCookie(key: string, value: string) {
+  return cookies().set(key, value, {
+    httpOnly: true,
+    secure: true,
+  });
+}
+
+export async function login({
   username,
   password,
 }: {
@@ -13,24 +24,24 @@ export async function loginAction({
   password: string;
 }) {
   try {
-    const response = await fetch(`${baseUrl}/login`, {
+    const response = await fetch(`${baseUrl}/conta/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username: username, password: password }),
+      body: JSON.stringify({
+        username,
+        password,
+      }),
     });
+
+    if (!response.ok) {
+      return { message: "invalid user", success: false, data: {} };
+    }
 
     const data = await response.json();
 
-    if (data.error) {
-      return { message: data.error, success: false, data: {} };
-    }
-
-    cookies().set("token", data.token, {
-      httpOnly: true,
-      secure: true,
-    });
+    setCookie("token", data.token);
 
     return { message: "usuário logado com sucesso", success: true, data: {} };
   } catch (error) {
@@ -44,18 +55,19 @@ export async function getProfile(): Promise<{
   error?: any;
 }> {
   try {
-    const token = cookies().get("token");
+    const token = getCookie("token");
 
-    const response: any = await fetch(`${baseUrl}/perfil`, {
-      method: "POST",
+    if (!token) {
+      return { error: "token not found", autorizado: false };
+    }
+
+    const response: any = await fetch(`${baseUrl}/conta/perfil`, {
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ token: token?.value }),
     });
-    const data = await response.json();
 
-    console.log(data);
+    const data = await response.json();
 
     return data;
   } catch (error) {

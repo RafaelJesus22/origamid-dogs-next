@@ -29,7 +29,7 @@ export default function LoginForm() {
   async function formSubmit(data: Form) {
     setError("");
     setIsLoading(true);
-    const response = await actions.loginAction(data);
+    const response = await actions.login(data);
 
     setIsLoading(false);
 
