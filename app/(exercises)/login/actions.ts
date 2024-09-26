@@ -5,10 +5,6 @@ import { cookies } from "next/headers";
 
 const baseUrl = "https://api.origamid.online";
 
-function getCookie(key: string) {
-  return cookies().get(key)?.value;
-}
-
 function setCookie(key: string, value: string) {
   return cookies().set(key, value, {
     httpOnly: true,
@@ -55,7 +51,7 @@ export async function getProfile(): Promise<{
   error?: any;
 }> {
   try {
-    const token = getCookie("token");
+    const token = cookies().get("token")?.value;
 
     if (!token) {
       return { error: "token not found", autorizado: false };

@@ -8,7 +8,7 @@ import { z } from "zod";
 import { addProduct } from "../../actions/produtos";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 

@@ -60,6 +60,6 @@ export async function addProduct(product: Omit<Product, "importado">) {
 
     revalidatePath("/produtos");
   } catch (e) {
-    console.log("Deu ruim,");
+    console.log("Deu ruim", e);
   }
 }
