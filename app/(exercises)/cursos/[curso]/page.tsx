@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCurso, getCursos } from "../actions";
 import { Params } from "../utils";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
   const cursos = await getCursos();
@@ -10,6 +11,14 @@ export async function generateStaticParams() {
   }));
 
   return staticParams;
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const curso = await getCurso(params.curso);
+
+  return {
+    title: curso.nome,
+  };
 }
 
 export default async function Curso({ params }: Params) {
