@@ -1,6 +1,16 @@
 import Link from "next/link";
-import { getCurso } from "../api";
+import { getCurso, getCursos } from "../actions";
 import { Params } from "../utils";
+
+export async function generateStaticParams() {
+  const cursos = await getCursos();
+
+  const staticParams = cursos.map((curso) => ({
+    curso: curso.slug,
+  }));
+
+  return staticParams;
+}
 
 export default async function Curso({ params }: Params) {
   const curso = await getCurso(params.curso);
