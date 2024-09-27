@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "api.origamid.online",
+        hostname: "dogsapi.origamid.dev",
         port: "",
         pathname: "/imagens/**",
       },
