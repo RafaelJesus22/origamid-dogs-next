@@ -22,6 +22,11 @@ export default function Home() {
       name: "Cache",
       link: "/produtos",
     },
+    {
+      id: 5,
+      name: "Image",
+      link: "/animais",
+    },
   ];
 
   return (
