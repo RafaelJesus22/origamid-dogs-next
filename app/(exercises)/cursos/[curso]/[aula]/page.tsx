@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getAulas, getCurso, getCursos } from "../../actions";
 import { Aula as AulaProps, Params } from "../../utils";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const cursos = await getCursos();
@@ -24,6 +25,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function Aula({ params }: Params) {
   const aula = await getAulas(params.curso, params.aula);
+
+  if (aula.error) return notFound();
 
   return (
     <main>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getCurso, getCursos } from "../actions";
 import { Params } from "../utils";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const cursos = await getCursos();
@@ -23,6 +24,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function Curso({ params }: Params) {
   const curso = await getCurso(params.curso);
+
+  if (curso.error) return notFound();
 
   return (
     <main>

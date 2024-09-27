@@ -5,6 +5,7 @@ export interface Params {
   };
 }
 export interface Aula {
+  error?: string;
   id: number;
   slug: string;
   nome: string;
@@ -15,6 +16,7 @@ export interface Aula {
 }
 
 export interface Curso {
+  error?: string;
   id: number;
   slug: string;
   nome: string;
