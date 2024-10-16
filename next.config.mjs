@@ -5,8 +5,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "dogsapi.origamid.dev",
-        port: "",
-        pathname: "/imagens/**",
       },
     ],
   },
