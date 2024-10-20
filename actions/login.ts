@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 export async function login(_: object, formData: FormData) {
   try {
     const username = formData.get("username") as string | null;
-    const password = formData.get("username") as string | null;
+    const password = formData.get("password") as string | null;
 
     if (!username || !password) {
       throw new Error("Preencha o formulário");
