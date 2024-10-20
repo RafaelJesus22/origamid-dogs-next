@@ -1,12 +1,15 @@
 "use client";
 
-import { login } from "@/actions/login";
 import { useFormState, useFormStatus } from "react-dom";
-import Button from "../forms/button";
-import Input from "../forms/input";
-import ErrorMessage from "../helper/error-message";
 import { useEffect } from "react";
 import Link from "next/link";
+
+import ErrorMessage from "@/components/custom/helper/error-message";
+import Button from "@/components/custom/forms/button";
+import Input from "@/components/custom/forms/input";
+import { login } from "@/actions/login";
+
+import styles from "./login-form.module.css";
 
 function FormButton() {
   const { pending } = useFormStatus();
@@ -32,7 +35,7 @@ export default function LoginForm() {
   return (
     <>
       <section>
-        <form action={action}>
+        <form action={action} className={styles.form}>
           <Input
             label="Usuário"
             type="text"
@@ -45,14 +48,23 @@ export default function LoginForm() {
             name="password"
             placeholder="senha"
           />
-          <FormButton />
-
           <ErrorMessage error={state.error} />
+          <FormButton />
         </form>
       </section>
 
       <section>
-        <Link href="/login/perdeu">Perdeu a senha?</Link>
+        <Link className={styles.perdeu} href="/login/perdeu">
+          Perdeu a senha?
+        </Link>
+      </section>
+
+      <section className={styles.cadastro}>
+        <h2 className={styles.subtitle}>Cadastre-se</h2>
+        <p>Ainda não possui conta? Cadastre-se no site.</p>
+        <Link className="button" href="/login/criar">
+          Cadastro
+        </Link>
       </section>
     </>
   );
