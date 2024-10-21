@@ -1,3 +1,9 @@
 "use server";
 
-export async function logout() {}
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
+export async function logout() {
+  cookies().delete("token");
+  redirect("/login");
+}
