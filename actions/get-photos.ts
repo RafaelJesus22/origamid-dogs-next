@@ -14,7 +14,10 @@ export type Photo = {
 
 export async function getPhotos(): Promise<Photo[]> {
   const response = await fetch(
-    "https://dogsapi.origamid.dev/json/api/photo/?_page=1&total=6&user=0"
+    "https://dogsapi.origamid.dev/json/api/photo/?_page=1&total=6&user=0",
+    {
+      next: { revalidate: 60, tags: ["photos"] },
+    }
   );
   return (await response.json()) as Photo[];
 }

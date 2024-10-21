@@ -1,13 +1,13 @@
-"use client";
+import { Metadata } from "next";
 
-import { useUserContext } from "@/context/user-context";
+export const metadata: Metadata = {
+  title: "Minha conta",
+};
 
 export default function ContaPage() {
-  const { user } = useUserContext();
-
   return (
     <main>
-      <h1>Conta: {user?.nome}</h1>
+      <h1>Conta</h1>
     </main>
   );
 }
