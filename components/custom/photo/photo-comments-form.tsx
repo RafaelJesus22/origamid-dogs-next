@@ -1,16 +1,13 @@
 "use client";
 
+import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import styles from "./photo-comments-form.module.css";
+
+import { Comment } from "@/actions/get-photo-by-id";
+import commentPost from "@/actions/comment-post";
 import EnviarIcon from "@/icons/enviar-icon";
 import ErrorMessage from "../helper/error-message";
-// import commentPost from '@/actions/comment-post';
-import React from "react";
-import { Comment } from "@/actions/get-photo-by-id";
-
-async function commentPost() {
-  return null;
-}
+import styles from "./photo-comments-form.module.css";
 
 function FormButton() {
   const { pending } = useFormStatus();
