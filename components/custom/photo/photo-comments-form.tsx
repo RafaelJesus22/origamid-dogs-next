@@ -1,12 +1,16 @@
-'use client';
+"use client";
 
-import { useFormState, useFormStatus } from 'react-dom';
-import styles from './photo-comments-form.module.css';
-import EnviarIcon from '@/icons/enviar-icon';
-import ErrorMessage from '../helper/error-message';
-import { Comment } from '@/actions/photo-get';
-import commentPost from '@/actions/comment-post';
-import React from 'react';
+import { useFormState, useFormStatus } from "react-dom";
+import styles from "./photo-comments-form.module.css";
+import EnviarIcon from "@/icons/enviar-icon";
+import ErrorMessage from "../helper/error-message";
+// import commentPost from '@/actions/comment-post';
+import React from "react";
+import { Comment } from "@/actions/get-photo-by-id";
+
+async function commentPost() {
+  return null;
+}
 
 function FormButton() {
   const { pending } = useFormStatus();
@@ -29,22 +33,22 @@ export default function PhotoCommentsForm({
   const [state, action] = useFormState(commentPost, {
     ok: false,
     data: null,
-    error: '',
+    error: "",
   });
 
   React.useEffect(() => {
     if (state.ok && state.data) {
       setComments((comments) => [...comments, state.data]);
-      setComment('');
+      setComment("");
     }
   }, [state, setComments]);
 
-  const [comment, setComment] = React.useState('');
+  const [comment, setComment] = React.useState("");
 
   return (
     <form
       action={action}
-      className={`${styles.form} ${single ? styles.single : ''}`}
+      className={`${styles.form} ${single ? styles.single : ""}`}
     >
       <input type="hidden" name="id" id="id" value={id} />
       <textarea

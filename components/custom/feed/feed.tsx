@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import getPhotos, { Photo } from "@/actions/get-photos";
 import FeedPhotos from "./feed-photos";
+import Loading from "../helper/loading";
+import styles from "./feed.module.css";
 
 interface Props {
   photos: Photo[];
@@ -65,11 +67,9 @@ export default function Feed({ photos, user = 0 }: Props) {
   return (
     <div>
       <FeedPhotos photos={photosFeed} />
-      {isLoading && (
-        <p className="my-4 font-semibold text-xl text-yellow-950">
-          Carregando...
-        </p>
-      )}
+      <div className={styles.loadingWrapper}>
+        {isLoading && <Loading modal />}
+      </div>
     </div>
   );
 }

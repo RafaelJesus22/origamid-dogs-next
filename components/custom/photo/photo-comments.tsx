@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import PhotoCommentsForm from './photo-comments-form';
-import styles from './photo-comments.module.css';
-import { useUser } from '@/context/user-context';
-import { Comment } from '@/actions/photo-get';
+import React from "react";
+import PhotoCommentsForm from "./photo-comments-form";
+import styles from "./photo-comments.module.css";
+import { useUserContext } from "@/context/user-context";
+import { Comment } from "@/actions/get-photo-by-id";
 
 const PhotoComments = (props: {
   single: boolean;
@@ -13,7 +13,7 @@ const PhotoComments = (props: {
 }) => {
   const [comments, setComments] = React.useState(() => props.comments);
   const commentsSection = React.useRef<HTMLUListElement>(null);
-  const { user } = useUser();
+  const { user } = useUserContext();
 
   React.useEffect(() => {
     if (commentsSection.current) {
@@ -25,7 +25,7 @@ const PhotoComments = (props: {
     <>
       <ul
         ref={commentsSection}
-        className={`${styles.comments} ${props.single ? styles.single : ''}`}
+        className={`${styles.comments} ${props.single ? styles.single : ""}`}
       >
         {comments.map((comment) => (
           <li key={comment.comment_ID}>
