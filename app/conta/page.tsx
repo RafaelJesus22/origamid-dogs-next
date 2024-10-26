@@ -15,7 +15,7 @@ export default async function ContaPage() {
   return (
     <main>
       {photos?.length ? (
-        <Feed photos={photos || []} />
+        <Feed photos={photos || []} user={user?.username} />
       ) : (
         <div>
           <p className="text-slate-700 text-xl mb-4">Nenhuma foto encontrada</p>

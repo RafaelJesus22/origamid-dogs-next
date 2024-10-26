@@ -1,3 +1,5 @@
+"use client";
+
 import { Photo } from "@/actions/get-photos";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,14 +9,14 @@ interface Props {
   photos: Photo[];
 }
 
-export default async function FeedPhotos({ photos }: Props) {
+export default function FeedPhotos({ photos }: Props) {
   return (
     <ul className={`${styles.feed} animeLeft`}>
-      {photos.map((photo) => (
+      {photos?.map((photo) => (
         <li key={photo.id} className={styles.photo}>
           <Link href={`/foto/${photo.id}`} scroll={false}>
             <Image
-              src={photo.src}
+              src={photo?.src}
               width={1500}
               height={1500}
               alt={photo.title}
