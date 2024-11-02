@@ -26,6 +26,11 @@ export default function FeedPhotos({ photos }: Props) {
           </Link>
         </li>
       ))}
+      {!photos.length && (
+        <div className="flex flex-1 items-center justify-center absolute inset-0">
+          <p>Não existem postagem</p>
+        </div>
+      )}
     </ul>
   );
 }
